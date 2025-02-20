@@ -1,0 +1,10 @@
+# Role: vm_info
+#
+---
+- name: vm_info
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  roles:
+      - role: vm_info
