@@ -1,5 +1,5 @@
 ---
-vm_names:
+vm_names: "{{ _vm_names }}"
 vcenter_hostname:
 vcenter_username:
 vcenter_password:
