@@ -7,7 +7,7 @@
     schema: "vsphere"
     show_attribute: true
     show_tag: true
-    properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
+    # properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
 
 - name: Log vms_lookup_result
   when: vm_info_results is defined
