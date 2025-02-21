@@ -8,7 +8,7 @@
     tags: true
     tag_details: true
     properties:
-      - '_vimid'
+      - 'moid'
       - 'config.cpuHotAddEnabled'
       # - config.cpuHotRemoveEnabled
       # - config.hardware.memoryMB
