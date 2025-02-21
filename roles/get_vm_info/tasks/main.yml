@@ -4,10 +4,10 @@
   community.vmware.vmware_guest_info:
     datacenter: "{{ datacenter_name }}"
     name: "{{ _vm_names }}"
-    # schema: "vsphere"
+    schema: "vsphere"
     tags: true
     tag_details: true
-    # properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
+    properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
 
 - name: Log vms_lookup_result
   when: vm_info_results is defined
