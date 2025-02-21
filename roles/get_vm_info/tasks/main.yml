@@ -4,12 +4,12 @@
   community.vmware.vmware_guest_info:
     datacenter: "{{ datacenter_name }}"
     name: "{{ _vm_names }}"
-    schema: vsphere
+    # schema: vsphere
     tags: true
     tag_details: true
     properties:
-      - 'moid'
-      - 'config.cpuHotAddEnabled'
+      # - 'instance.moid'
+      # - 'config.cpuHotAddEnabled'
       # - config.cpuHotRemoveEnabled
       # - config.hardware.memoryMB
       # - config.files.vmPathName
