@@ -8,13 +8,13 @@
     tags: true
     tag_details: true
     properties:
-      - _vimid
-      - config.cpuHotAddEnabled
-      - config.cpuHotRemoveEnabled
-      - config.hardware.memoryMB
-      - config.files.vmPathName
-      - config.guestFullName
-      - config.guestId
+      - '_vimid'
+      - 'config.cpuHotAddEnabled'
+      # - config.cpuHotRemoveEnabled
+      # - config.hardware.memoryMB
+      # - config.files.vmPathName
+      # - config.guestFullName
+      # - config.guestId
       # - hardware.device.backing.thinProvisioned
       # - hw_guest_full_name
       # - hw_guest_id
@@ -40,7 +40,7 @@
 - name: Log vms_lookup_result
   when: vm_info_results is defined
   ansible.builtin.debug:
-    var: vm_info_results.instance
+    var: vm_info_results
     # msg: "{{ item.uuid }}"
   # with_items:
   #   - "{{ vm_info_results.virtual_machines | json_query(query) }}"
