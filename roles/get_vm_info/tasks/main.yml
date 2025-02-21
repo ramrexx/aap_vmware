@@ -2,9 +2,6 @@
 - name: Gather info from a guest using the vSphere API output schema
   register: vm_info_results
   community.vmware.vmware_guest_info:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
     datacenter: "{{ datacenter_name }}"
     name: "{{ _vm_names }}"
     schema: "vsphere"
