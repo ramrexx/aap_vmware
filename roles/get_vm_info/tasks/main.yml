@@ -5,7 +5,9 @@
     datacenter: "{{ datacenter_name }}"
     name: "{{ _vm_names }}"
     schema: "vsphere"
-    # properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
+    show_attribute: true
+    show_tag: true
+    properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
 
 - name: Log vms_lookup_result
   when: vm_info_results is defined
