@@ -10,7 +10,7 @@
 - name: Log vms_lookup_result
   when: vm_info_results is defined
   ansible.builtin.debug:
-    var: vm_info_results.virtual_machines
+    var: vm_info_results
     # msg: "{{ item.uuid }}"
   # with_items:
   #   - "{{ vm_info_results.virtual_machines | json_query(query) }}"
