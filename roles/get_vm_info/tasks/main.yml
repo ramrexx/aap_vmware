@@ -10,11 +10,12 @@
 - name: Log vms_lookup_result
   when: vm_info_results is defined
   ansible.builtin.debug:
-    msg: "{{ item.uuid }}"
-  with_items:
-    - "{{ vm_info_results.virtual_machines | json_query(query) }}"
-  vars:
-    query: "[?guest_name=='{{ _vm_names }}']"
+    var: vm_info_results.virtual_machines
+    # msg: "{{ item.uuid }}"
+  # with_items:
+  #   - "{{ vm_info_results.virtual_machines | json_query(query) }}"
+  # vars:
+  #   query: "[?guest_name=='{{ _vm_names }}']"
 
 
 # - name: Log vms_lookup_result
