@@ -8,28 +8,34 @@
     tags: true
     tag_details: true
     properties:
-      - hw_name
-      - hw_power_status
-      - hw_guest_full_name
-      - hw_guest_id
-      - hw_product_uuid
-      - hw_processor_count
-      - hw_cores_per_socket
-      - hw_memtotal_mb
-      - hw_interfaces
-      - hw_datastores
-      - hw_esxi_host
-      - hw_is_template
-      - hw_folder
-      - instance_uuid
-      - guest_tools_status
-      - guest_tools_version
-      - ipv4
-      - ipv6
-      - annotation
-      - moid
-      - hw_cluster
-      - tags
+      - _vimid
+      - config.cpuHotAddEnabled
+      - config.cpuHotRemoveEnabled
+      - config.hardware.memoryMB
+      - config.files.vmPathName
+      - config.guestFullName
+      - config.guestId
+      # - hardware.device.backing.thinProvisioned
+      # - hw_guest_full_name
+      # - hw_guest_id
+      # - hw_product_uuid
+      # - hw_processor_count
+      # - hw_cores_per_socket
+      # - hw_memtotal_mb
+      # - hw_interfaces
+      # - hw_datastores
+      # - hw_esxi_host
+      # - hw_is_template
+      # - hw_folder
+      # - instance_uuid
+      # - guest_tools_status
+      # - guest_tools_version
+      # - ipv4
+      # - ipv6
+      # - annotation
+      # - moid
+      # - hw_cluster
+      # - tags
 
 - name: Log vms_lookup_result
   when: vm_info_results is defined
