@@ -1,0 +1,11 @@
+# Role: vm_info
+#
+---
+- name: get_vm_info
+  hosts: localhost
+  become: false
+  gather_facts: false
+  delegate_to: localhost
+
+  roles:
+      - role: get_vm_info

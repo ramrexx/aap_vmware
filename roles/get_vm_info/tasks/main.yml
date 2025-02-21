@@ -1,0 +1,52 @@
+#
+- name: Gather info from a guest using the vSphere API output schema
+  register: vm_info_results
+  community.vmware.vmware_guest_info:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datacenter: "{{ datacenter_name }}"
+    name: "{{ _vm_names }}"
+    schema: "vsphere"
+    # properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
+
+- name: Log vms_lookup_result
+  when: vm_info_results is defined
+  ansible.builtin.debug:
+    msg: "{{ item.uuid }}"
+  with_items:
+    - "{{ vm_info_results.virtual_machines | json_query(query) }}"
+  vars:
+    query: "[?guest_name=='{{ _vm_names }}']"
+
+
+# - name: Log vms_lookup_result
+#   # tags: always
+#   when: vms_lookup_result is defined
+#   ansible.builtin.debug:
+#     var: vms_lookup_result
+#     # verbosity: 2
+
+# - name: Collect information about a specific VM
+#   register: get_vm_info_result
+#   vmware.vmware_rest.vcenter_vm_info:
+#     vm: '{{ vms_lookup_result.value[0].vm }}'
+
+# - name: Log get_vm_info_result
+#   # tags: always
+#   when: get_vm_info_result is defined
+#   ansible.builtin.debug:
+#     var: get_vm_info_result
+#     # verbosity: 2
+
+# - name: Get guest identity information
+#   register: vm_result
+#   vmware.vmware_rest.vcenter_vm_guest_identity_info:
+#     vm: '{{ get_vm_info_result.id }}'
+
+# - name: Log vm_result
+#   # tags: always
+#   when: vm_result is defined
+#   ansible.builtin.debug:
+#     var: vm_result
+#     # verbosity: 2
