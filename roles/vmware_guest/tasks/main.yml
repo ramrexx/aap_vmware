@@ -31,6 +31,7 @@
     cluster: "{{ vcenter_cluster }}"
     datacenter: "{{ vcenter_datacenter }}"
     delete_from_inventory: true
+    force: true
     name: "{{ vm_name }}"
     state: absent
 
