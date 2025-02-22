@@ -1,0 +1,11 @@
+# Role: vmware_guest
+#
+---
+- name: vmware_guest
+  hosts: localhost
+  connection: local
+  become: false
+  gather_facts: false
+
+  roles:
+      - role: vmware_guest
