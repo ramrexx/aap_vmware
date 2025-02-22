@@ -20,7 +20,7 @@
 - name: Wait for SSH to come up
   tags: create
   wait_for:
-    host: "{{ vm_name }}"
+    host: "{{ ansible_host }}"
     port: 22
     delay: 90
     timeout: 320
