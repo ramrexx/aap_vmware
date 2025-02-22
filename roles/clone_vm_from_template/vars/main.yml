@@ -5,7 +5,7 @@ password: "{{ vcenter_password }}"
 validate_certs: "{{ vcenter_validate_certs | default(false) }}"
 vcenter_cluster:
 vcenter_datacenter:
-vcenter_folder: "SDDC-Datacenter/vm"
+vcenter_folder: "SDDC-Datacenter/vm/Workloads/sandbox-xncww"
 vm_name:
 vcenter_network:
 vm_state: present
