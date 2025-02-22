@@ -8,5 +8,5 @@ validate_certs: "{{ vcenter_validate_certs | default(false) }}"
 # vm_folder: "{{ vcenter_folder }}"
 # name:
 # vcenter_network:
-# vm_state:
+vm_state: present
 # vm_template:
