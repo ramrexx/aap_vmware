@@ -3,7 +3,7 @@
 ---
 - name: clone_vm_from_template
   hosts: localhost
-  conntion: local
+  connection: local
   become: false
   gather_facts: false
 

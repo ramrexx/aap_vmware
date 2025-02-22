@@ -2,7 +2,7 @@
 hostname: "{{ vcenter_hostname }}"
 username: "{{ vcenter_username }}"
 password: "{{ vcenter_password }}"
-validate_certs: "{{ vcenter_password | default(false) }}"
+validate_certs: "{{ vcenter_validate_certs | default(false) }}"
 # cluster: "{{ vcenter_cluster }}"
 # datacenter: "{{ vcenter_datacenter }}"
 # vm_folder: "{{ vcenter_folder }}"

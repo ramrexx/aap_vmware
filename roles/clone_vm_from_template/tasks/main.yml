@@ -9,7 +9,7 @@
     template: "{{ vcenter_template }}"
 
 - name: Log clone_vm_result
-  tags: always
+  # tags: always
   when: clone_vm_result is defined
   ansible.builtin.debug:
     var: clone_vm_result
