@@ -4,6 +4,8 @@
   register: vmware_guest_result
   community.vmware.vmware_guest:
     cluster: "{{ vcenter_cluster }}"
+    customization:
+      hostname: "{{ vm_name }}"
     datacenter: "{{ vcenter_datacenter }}"
     folder: "{{ vcenter_folder }}"
     name: "{{ vm_name }}"
