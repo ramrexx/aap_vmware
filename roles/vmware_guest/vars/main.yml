@@ -15,3 +15,4 @@ vcenter_template:
 # vm args
 vm_name:
 vm_state:
+vm_password:

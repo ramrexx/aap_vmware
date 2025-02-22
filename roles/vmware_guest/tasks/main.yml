@@ -6,13 +6,14 @@
     cluster: "{{ vcenter_cluster }}"
     customization:
       hostname: "{{ vm_name }}"
+      password: "{{ vm_password }}"
     datacenter: "{{ vcenter_datacenter }}"
     folder: "{{ vcenter_folder }}"
     name: "{{ vm_name }}"
     networks:
         - name: "{{ vcenter_network }}"
-          type: dhcp
-          wait_for_ip_address: yes
+          # type: dhcp
+          # wait_for_ip_address: yes
     state: poweredon
     template: "{{ vcenter_template }}"
     validate_certs: "{{ vcenter_validate_certs | default(false) }}"
