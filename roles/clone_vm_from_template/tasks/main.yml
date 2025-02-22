@@ -1,0 +1,24 @@
+---
+- name: Clone VM from template
+  register: clone_vm_result
+  community.vmware.vmware_guest:
+    cluster: "{{ vcenter_cluster }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    name: "{{ vm_name }}"
+    state: "{{ vm_state }}"
+    template: "{{ vcenter_template }}"
+
+- name: Log clone_vm_result
+  tags: always
+  when: clone_vm_result is defined
+  ansible.builtin.debug:
+    var: clone_vm_result
+    # verbosity: 2
+
+# - name: Wait for SSH to come up
+#   wait_for:
+#     host: "{{ ansible_host }}"
+#     port: 22
+#     delay: 90
+#     timeout: 320
+#     state:

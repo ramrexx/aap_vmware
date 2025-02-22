@@ -1,0 +1,11 @@
+# Role: clone_vm_from_template
+#
+---
+- name: clone_vm_from_template
+  hosts: localhost
+  conntion: local
+  become: false
+  gather_facts: false
+
+  roles:
+      - role: clone_vm_from_template

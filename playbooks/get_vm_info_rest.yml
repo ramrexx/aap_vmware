@@ -1,0 +1,11 @@
+# Role: get_vm_info_rest
+#
+---
+- name: get_vm_info_rest
+  hosts: localhost
+  conntion: local
+  become: false
+  gather_facts: false
+
+  roles:
+      - role: get_vm_info_rest

@@ -4,8 +4,8 @@
 - name: get_vm_info
   hosts: localhost
   become: false
-  gather_facts: false
   connection: local
+  gather_facts: false
 
   roles:
       - role: get_vm_info

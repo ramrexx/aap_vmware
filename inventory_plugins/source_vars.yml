@@ -1,0 +1,69 @@
+# VMWare invnetory source plugins
+---
+filters:
+- >-
+    guest.ipAddress is defined and (config.name is match('linux*') or
+    config.name is match('node1') or config.name is match('rhel*') or
+    config.name is match('win*') or config.name is match('bastion*'))
+
+compose:
+  ansible_host: 'guest.ipAddress'
+  composed_var: 'config.name'
+
+hostnames:
+- config.name
+
+properties:
+- config.cpuHotAddEnabled
+- config.cpuHotRemoveEnabled
+- config.datastoreUrl
+- config.guestId
+- config.hardware.numCPU
+- config.name
+- config.template
+- config.uuid
+- config.instanceUuid
+- config.hardware.memoryMB
+- config.hardware.numCoresPerSocket
+- config.memoryHotAddEnabled
+- name
+- guest.guestFamily
+- guest.guestFullName
+- guest.guestId
+- guest.guestState
+- guest.hostName
+- guest.ipAddress
+- guest.toolsStatus
+- runtime.connectionState
+- runtime.maxMemoryUsage
+- summary.config.vmPathName
+- summary.runtime.powerState
+- tag
+
+# uncomment to collect everything
+# properties: all
+
+# (default properties)
+# properties:
+# - config.cpuHotAddEnabled
+# - config.cpuHotRemoveEnabled
+# - config.guestId
+# - config.hardware.numCPU
+# - config.instanceUuid
+# - config.name
+# - config.template
+# - config.uuid
+# - guest.guestId
+# - guest.guestState
+# - guest.hostName
+# - guest.ipAddress
+# - name
+# - runtime.connectionState
+# - runtime.maxMemoryUsage
+# - summary.runtime.powerState
+
+groups:
+  windows: "'windows' in config.guestId"
+  linux: "'rhel' in config.guestId"
+  rhel: "'rhel' in config.guestId"
+  vmware: "'*' in config.guestId"
