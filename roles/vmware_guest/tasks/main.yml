@@ -3,6 +3,7 @@
   tags: create
   register: vmware_guest_result
   community.vmware.vmware_guest:
+    annotation: "{{ vm_annotion | default('Ansible Provisioned') }}"
     cluster: "{{ vcenter_cluster }}"
     customization:
       hostname: "{{ vm_name }}"
@@ -12,6 +13,7 @@
     name: "{{ vm_name }}"
     networks:
         - name: "{{ vcenter_network }}"
+          connected: true
           start_connected: true
           type: dhcp
           wait_for_ip_address: yes
@@ -22,7 +24,7 @@
 - name: Wait for SSH to come up
   tags: create
   wait_for:
-    host: "{{ ansible_host }}"
+    host: "{{ vm_name }}"
     port: 22
     delay: 90
     timeout: 320
