@@ -2,7 +2,7 @@
 #
 ---
 - name: vmware_guest
-  hosts: all
+  hosts: localhost
   connection: local
   become: false
   gather_facts: false
