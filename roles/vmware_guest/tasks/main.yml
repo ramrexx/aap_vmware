@@ -11,7 +11,7 @@
     hardware:
       memory_mb: "{{ vm_sizes[vmsize].ram }}"
       num_cpus: "{{ vm_sizes[vmsize].cpu }}"
-    name: "{{ inventory_hostname }}"
+    name: "{{ vm_name }}"
     networks:
       - name: "{{ vcenter_network }}"
         type: dhcp
@@ -24,8 +24,8 @@
   tags: create
   when: vminfo_results.changed
   ansible.builtin.wait_for:
-    host: "{{ ansible_host }}"
-    port: "{{ ansible_port }}"
+    host: "{{ vm_name }}"
+    port: "{{ ansible_port | default(22) }}"
     delay: 30
     timeout: 1200
 
