@@ -18,7 +18,6 @@ vm_state:
 vm_password:
 vmsize: Small
 
----
 vm_sizes:
   Small:
     cpu: 1
