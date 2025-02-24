@@ -12,12 +12,23 @@
       memory_mb: "{{ vm_sizes[vmsize].ram }}"
       num_cpus: "{{ vm_sizes[vmsize].cpu }}"
     name: "{{ vm_name }}"
-    networks:
-      - name: "{{ vcenter_network }}"
-        type: dhcp
+    # networks:
+    #   - name: "{{ vcenter_network }}"
+    #     type: dhcp
     state: poweredon
     template: "{{ vcenter_template }}"
     wait_for_ip_address: true
+
+# - name: set the vm network to connect at startup
+#   tags: create
+#   community.vmware.vmware_guest_network:
+#     datacenter: "{{ vcenter_datacenter }}"
+#     cluster: "{{ vcenter_cluster }}"
+#     name: "{{ vm_name }}"
+#     mac_address: "{{ vminfo_results.instance.hw_eth0.macaddress }}"
+#     network_name: "VLAN_{{ vlan }}"
+#     start_connected: yes
+#     connected: yes
 
 - name: Wait for the system to respond to management
   delegate_to: localhost
