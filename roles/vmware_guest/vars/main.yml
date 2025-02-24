@@ -16,3 +16,16 @@ vcenter_template:
 vm_name:
 vm_state:
 vm_password:
+vmsize: Small
+
+---
+vm_sizes:
+  Small:
+    cpu: 1
+    ram: 4096
+  Medium:
+    cpu: 2
+    ram: 8192
+  Large:
+    cpu: 4
+    ram: 16384

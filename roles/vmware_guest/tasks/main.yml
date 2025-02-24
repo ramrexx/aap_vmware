@@ -1,49 +1,86 @@
+# ---
 ---
 - name: Clone VM from template
   tags: create
-  register: vmware_guest_result
+  register: vminfo_results
+  delegate_to: localhost
   community.vmware.vmware_guest:
-    annotation: "{{ vm_annotion | default('Ansible Provisioned') }}"
     cluster: "{{ vcenter_cluster }}"
-    customization:
-      hostname: "{{ vm_name }}"
-      password: "{{ vm_password | default(omit) }}"
     datacenter: "{{ vcenter_datacenter }}"
     folder: "{{ vcenter_folder }}"
-    name: "{{ vm_name }}"
+    hardware:
+      memory_mb: "{{ vm_sizes[vmsize].ram }}"
+      num_cpus: "{{ vm_sizes[vmsize].cpu }}"
+    name: "{{ inventory_hostname }}"
     networks:
-        - name: "{{ vcenter_network }}"
-          connected: true
-          start_connected: true
-          type: dhcp
-          wait_for_ip_address: yes
+      - name: "{{ vm_network }}"
+        type: dhcp
     state: poweredon
     template: "{{ vcenter_template }}"
-    validate_certs: "{{ vcenter_validate_certs | default(false) }}"
+    wait_for_ip_address: true
 
-- name: Wait for SSH to come up
+- name: Wait for the system to respond to management
+  delegate_to: localhost
   tags: create
-  wait_for:
-    host: "{{ vm_name }}"
-    port: 22
-    delay: 90
-    timeout: 320
-    state: started
+  when: vminfo_results.changed
+  ansible.builtin.wait_for:
+    host: "{{ ansible_host }}"
+    port: "{{ ansible_port }}"
+    delay: 30
+    timeout: 1200
 
-- name: Remove VM from vCenter
-  tags: remove
-  register: vmware_guest_result
-  community.vmware.vmware_guest:
-    cluster: "{{ vcenter_cluster }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    delete_from_inventory: true
-    force: true
-    name: "{{ vm_name }}"
-    state: absent
-
-- name: Log vmware_guest_result
+- name: Log vminfo_results
   tags: always
-  when: vmware_guest_result is defined
+  when: vminfo_results is defined
   ansible.builtin.debug:
-    var: vmware_guest_result
+    var: vminfo_results
     # verbosity: 2
+
+# - name: Clone VM from template
+#   tags: create
+#   register: vmware_guest_result
+#   community.vmware.vmware_guest:
+#     annotation: "{{ vm_annotion | default('Ansible Provisioned') }}"
+#     cluster: "{{ vcenter_cluster }}"
+#     customization:
+#       hostname: "{{ vm_name }}"
+#       password: "{{ vm_password | default(omit) }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     folder: "{{ vcenter_folder }}"
+#     name: "{{ vm_name }}"
+#     networks:
+#         - name: "{{ vcenter_network }}"
+#           connected: true
+#           start_connected: true
+#           type: dhcp
+#           wait_for_ip_address: yes
+#     state: poweredon
+#     template: "{{ vcenter_template }}"
+#     validate_certs: "{{ vcenter_validate_certs | default(false) }}"
+
+# - name: Wait for SSH to come up
+#   tags: create
+#   wait_for:
+#     host: "{{ vm_name }}"
+#     port: 22
+#     delay: 90
+#     timeout: 320
+#     state: started
+
+# - name: Remove VM from vCenter
+#   tags: remove
+#   register: vmware_guest_result
+#   community.vmware.vmware_guest:
+#     cluster: "{{ vcenter_cluster }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     delete_from_inventory: true
+#     force: true
+#     name: "{{ vm_name }}"
+#     state: absent
+
+# - name: Log vmware_guest_result
+#   tags: always
+#   when: vmware_guest_result is defined
+#   ansible.builtin.debug:
+#     var: vmware_guest_result
+#     # verbosity: 2
