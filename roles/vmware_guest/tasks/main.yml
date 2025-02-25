@@ -35,10 +35,11 @@
   tags: create
   when: vminfo_results.changed
   ansible.builtin.wait_for:
-    host: "{{ vm_name }}"
+    host: "{{ ansible_host }}"
     port: "{{ ansible_port | default(22) }}"
     delay: 30
     timeout: 1200
+    state: started
 
 - name: Log vminfo_results
   tags: always
