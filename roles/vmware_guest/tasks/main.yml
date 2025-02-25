@@ -19,6 +19,25 @@
     template: "{{ vcenter_template }}"
     wait_for_ip_address: true
 
+- name: Log vminfo_results
+  tags: always
+  when: vminfo_results is defined
+  ansible.builtin.debug:
+    var: vminfo_results
+    # verbosity: 2
+
+- name: Wait for the system to respond to management
+  delegate_to: localhost
+  tags: create
+  when: vminfo_results.changed
+  ansible.builtin.wait_for:
+    host: "{{ ansible_host }}"
+    port: "{{ ansible_port | default(22) }}"
+    delay: 30
+    timeout: 300
+    state: started
+
+
 # - name: set the vm network to connect at startup
 #   tags: create
 #   community.vmware.vmware_guest_network:
@@ -29,24 +48,6 @@
 #     network_name: "VLAN_{{ vlan }}"
 #     start_connected: yes
 #     connected: yes
-
-- name: Wait for the system to respond to management
-  delegate_to: localhost
-  tags: create
-  when: vminfo_results.changed
-  ansible.builtin.wait_for:
-    host: "{{ ansible_host }}"
-    port: "{{ ansible_port | default(22) }}"
-    delay: 30
-    timeout: 1200
-    state: started
-
-- name: Log vminfo_results
-  tags: always
-  when: vminfo_results is defined
-  ansible.builtin.debug:
-    var: vminfo_results
-    # verbosity: 2
 
 # - name: Clone VM from template
 #   tags: create
