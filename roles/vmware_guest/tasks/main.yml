@@ -31,7 +31,7 @@
   tags: create
   when: vminfo_results.changed
   ansible.builtin.wait_for:
-    host: "{{ ansible_host }}"
+    host: "{{ vminfo_results.instance.ipv4 }}"
     port: "{{ ansible_port | default(22) }}"
     delay: 30
     timeout: 300
