@@ -4,6 +4,8 @@
 .sass-cache/
 .manifest.yaml
 # .vscode
+*.log
+*.lock
 
 # begin exclude MAC OS X files
 __MACOSX
